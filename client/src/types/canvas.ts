@@ -90,6 +90,8 @@ export interface CanvasElement {
   updatedAt: Date;
 }
 
+import type { Canvas as FabricCanvas } from 'fabric';
+
 /**
  * CanvasState defines the structure of the canvas-related state.
  */
@@ -98,6 +100,7 @@ export interface CanvasState {
   zoom: number;
   selectedObjects: string[]; // Array of fabricIds
   elements: CanvasElement[];
+  fabricCanvas: FabricCanvas | null;
 }
 
 /**
@@ -110,5 +113,6 @@ export interface CanvasActions {
   addElement: (element: CanvasElement) => void;
   updateElement: (fabricId: string, updates: Partial<CanvasElement>) => void;
   removeElement: (fabricId: string) => void;
+  setFabricCanvas: (canvas: FabricCanvas | null) => void;
   resetCanvas: () => void;
 }

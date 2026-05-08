@@ -11,6 +11,7 @@ export const useCanvasStore = create<CanvasState & CanvasActions>((set) => ({
   zoom: 1.0,
   selectedObjects: [],
   elements: [],
+  fabricCanvas: null,
 
   // --- ACTIONS ---
 
@@ -58,6 +59,11 @@ export const useCanvasStore = create<CanvasState & CanvasActions>((set) => ({
     })),
 
   /**
+   * Sets the fabric.Canvas instance.
+   */
+  setFabricCanvas: (canvas) => set({ fabricCanvas: canvas }),
+
+  /**
    * Resets the canvas UI state to defaults.
    */
   resetCanvas: () => set({
@@ -65,5 +71,6 @@ export const useCanvasStore = create<CanvasState & CanvasActions>((set) => ({
     zoom: 1.0,
     selectedObjects: [],
     elements: [],
+    fabricCanvas: null,
   }),
 }));
