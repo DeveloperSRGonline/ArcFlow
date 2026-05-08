@@ -31,10 +31,10 @@ ArchFlow is an AI-powered collaborative whiteboard for software engineers and ar
 - [*] 1.4.3 Protected Board Route
 
 ### 1.2 Canvas
-- [ ] 15.1 Integrate Fabric.js 6.x
-- [ ] 15.2 Implement infinite canvas with viewport
-- [ ] 15.3 Add dot grid background
-- [ ] 15.4 Implement zoom and pan controls
+- [*] 15.1 Integrate Fabric.js 6.x
+- [*] 15.2 Implement infinite canvas with viewport
+- [*] 15.3 Add dot grid background
+- [*] 15.4 Implement zoom and pan controls
 
 ### 1.3 Shapes
 - [ ] 16.1 Rectangle tool
@@ -268,6 +268,7 @@ ArchFlow is an AI-powered collaborative whiteboard for software engineers and ar
 2026-05-08 - Phase 1.4 - 14.4 Clerk Provider setup - COMPLETED
 2026-05-08 - Phase 1.4 - 1.4.2 Implement Sign-In and Sign-Up routes - COMPLETED
 2026-05-08 - Phase 1.4 - 1.4.3 Create ProtectedRoute for board access - COMPLETED
+2026-05-08 - Phase 1.2 - 1.5.1-1.5.4 Canvas Foundation (Fabric.js, Viewport, Grid) - COMPLETED
 ```
 
 ---
