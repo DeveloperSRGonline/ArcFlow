@@ -743,6 +743,32 @@ Each shape on the canvas is stored as a separate document (for efficient partial
 
 * Environment Configuration: Strict .env schema validation on startup via Zod. App refuses to start with invalid environment — no silent config failures.
 
+## **10.4 Engineering & Workflow Standards**
+
+* **Git Branching Strategy (Git Flow):**
+    - `main`: Production-ready, stable code only.
+    - `develop`: Primary integration branch for active development.
+    - `feature/*`: Specific tasks or features. Created from `develop`, merged back via PR.
+    - `hotfix/*`: Critical production fixes. Created from `main`, merged into `main` and `develop`.
+
+* **Commit Message Convention:**
+    - Use Conventional Commits: `type(scope): description`
+    - Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
+    - Example: `feat(canvas): implement zoom and pan controls`.
+
+* **Styling & UI:**
+    - **Strictly No Inline CSS**: All styles must reside in `.scss` files or use CSS Custom Properties.
+    - Use Design Tokens for colors, spacing, and typography to maintain consistency.
+
+* **Code Review & Pull Requests:**
+    - No direct commits to `main` or `develop` (except initial setup).
+    - Every feature must be merged via a Pull Request (PR) from a `feature/*` branch into `develop`.
+    - PRs should be small, focused, and include relevant tests.
+
+* **Testing & Validation:**
+    - All complex algorithms (Mess Cleanup, serialization) must have unit tests.
+    - Critical user flows must be covered by Playwright E2E tests before major releases.
+
 # **11\. Security Architecture**
 
 ## **11.1 Authentication & Authorization**
