@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFabricCanvas } from '../hooks/useFabricCanvas';
 import { useCanvasEvents } from '../hooks/useCanvasEvents';
+import { useCanvasGrid } from '../hooks/useCanvasGrid';
 import './CanvasContainer.scss';
 
 /**
@@ -10,6 +11,7 @@ import './CanvasContainer.scss';
 const CanvasContainer: React.FC = () => {
   const { canvasRef } = useFabricCanvas();
   useCanvasEvents();
+  useCanvasGrid();
 
   return (
     <div className="canvas-container">

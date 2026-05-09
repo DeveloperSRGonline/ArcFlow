@@ -17,7 +17,7 @@ export const useFabricCanvas = () => {
     const canvas = new Canvas(canvasRef.current, {
       width: window.innerWidth,
       height: window.innerHeight,
-      backgroundColor: '#111120', // --color-canvas from PRD
+      backgroundColor: 'transparent',
       preserveObjectStacking: true,
       selectionColor: 'rgba(91, 79, 232, 0.2)', // --color-accent-primary with alpha
       selectionBorderColor: '#5B4FE8',
