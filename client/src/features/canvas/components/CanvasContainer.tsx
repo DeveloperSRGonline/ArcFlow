@@ -2,6 +2,7 @@ import React from 'react';
 import { useFabricCanvas } from '../hooks/useFabricCanvas';
 import { useCanvasEvents } from '../hooks/useCanvasEvents';
 import { useCanvasGrid } from '../hooks/useCanvasGrid';
+import Toolbar from '../../toolbar/components/Toolbar';
 import './CanvasContainer.scss';
 
 /**
@@ -15,6 +16,7 @@ const CanvasContainer: React.FC = () => {
 
   return (
     <div className="canvas-container">
+      <Toolbar />
       <canvas ref={canvasRef} />
     </div>
   );
