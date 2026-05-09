@@ -1,6 +1,18 @@
 import { useEffect, useRef } from 'react';
-import { Canvas } from 'fabric';
+import { Canvas, FabricObject } from 'fabric';
 import { useCanvasStore } from '../../../store/useCanvasStore';
+
+// Configure global Fabric object selection styling
+// Following Phase 1.7.1 of setup-microsteps.md
+FabricObject.ownDefaults.borderColor = '#5B4FE8';
+FabricObject.ownDefaults.cornerColor = '#FFFFFF';
+FabricObject.ownDefaults.cornerStrokeColor = '#5B4FE8';
+FabricObject.ownDefaults.cornerSize = 8;
+FabricObject.ownDefaults.cornerStyle = 'circle';
+FabricObject.ownDefaults.transparentCorners = false;
+FabricObject.ownDefaults.padding = 10;
+FabricObject.ownDefaults.borderDashArray = [4, 4];
+FabricObject.ownDefaults.borderScaleFactor = 2;
 
 /**
  * useFabricCanvas - Hook to initialize and manage the Fabric.js canvas instance.
@@ -19,9 +31,9 @@ export const useFabricCanvas = () => {
       height: window.innerHeight,
       backgroundColor: 'transparent',
       preserveObjectStacking: true,
-      selectionColor: 'rgba(91, 79, 232, 0.2)', // --color-accent-primary with alpha
-      selectionBorderColor: '#5B4FE8',
-      selectionLineWidth: 2,
+      selectionColor: 'rgba(91, 79, 232, 0.15)', // --color-accent-primary with 15% opacity
+      selectionBorderColor: '#5B4FE8',           // --color-accent-primary
+      selectionLineWidth: 1.5,
     });
 
     // Store canvas instance in global store

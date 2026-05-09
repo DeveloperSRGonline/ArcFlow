@@ -101,6 +101,8 @@ export interface CanvasState {
   selectedObjects: string[]; // Array of fabricIds
   elements: CanvasElement[];
   fabricCanvas: FabricCanvas | null;
+  undoStack: CanvasElement[][];
+  redoStack: CanvasElement[][];
 }
 
 /**
@@ -114,5 +116,8 @@ export interface CanvasActions {
   updateElement: (fabricId: string, updates: Partial<CanvasElement>) => void;
   removeElement: (fabricId: string) => void;
   setFabricCanvas: (canvas: FabricCanvas | null) => void;
+  undo: () => void;
+  redo: () => void;
+  saveHistory: () => void;
   resetCanvas: () => void;
 }

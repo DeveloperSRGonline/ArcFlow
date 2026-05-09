@@ -37,19 +37,19 @@ ArchFlow is an AI-powered collaborative whiteboard for software engineers and ar
 - [*] 15.4 Implement zoom and pan controls
 
 ### 1.3 Shapes
-- [ ] 16.1 Rectangle tool
-- [ ] 16.2 Circle/Ellipse tool
-- [ ] 16.3 Arrow tool (with lines)
-- [ ] 16.4 Text tool
-- [ ] 16.5 Sticky Note tool
+- [*] 16.1 Rectangle tool
+- [*] 16.2 Circle/Ellipse tool
+- [*] 16.3 Arrow tool (with lines)
+- [*] 16.4 Text tool
+- [*] 16.5 Sticky Note tool
 
 ### 1.4 Selection & Editing
-- [ ] 17.1 Multi-select capability
-- [ ] 17.2 Resize handles
-- [ ] 17.3 Rotation handles
-- [ ] 17.4 Delete functionality
-- [ ] 17.5 Copy/Paste functionality
-- [ ] 17.6 Undo/Redo system
+- [*] 17.1 Multi-select capability
+- [*] 17.2 Resize handles
+- [*] 17.3 Rotation handles
+- [*] 17.4 Delete functionality
+- [*] 17.5 Copy/Paste functionality (Implemented Duplicate Ctrl+D)
+- [*] 17.6 Undo/Redo system
 
 ### 1.5 Backend
 - [ ] 18.1 Express.js server setup
@@ -269,6 +269,8 @@ ArchFlow is an AI-powered collaborative whiteboard for software engineers and ar
 2026-05-08 - Phase 1.4 - 1.4.2 Implement Sign-In and Sign-Up routes - COMPLETED
 2026-05-08 - Phase 1.4 - 1.4.3 Create ProtectedRoute for board access - COMPLETED
 2026-05-08 - Phase 1.2 - 1.5.1-1.5.4 Canvas Foundation (Fabric.js, Viewport, Grid) - COMPLETED
+2026-05-09 - Phase 1.3 - Drawing Tools (Toolbar, Shapes, Arrows, Text, Sticky) - COMPLETED
+2026-05-09 - Phase 1.4 - Selection styling, Object manipulation, Keyboard shortcuts, Undo/Redo - COMPLETED
 ```
 
 ---

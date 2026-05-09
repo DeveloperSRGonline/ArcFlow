@@ -65,21 +65,21 @@ This document outlines the granular steps to set up the ArchFlow frontend from s
   - Implement the background dot grid using a pattern or custom rendering on the canvas.
 
 ### 1.6 Drawing Tools (Phase 1.3)
-- [ ] **1.6.1 Toolbar Component**
+- [*] **1.6.1 Toolbar Component**
   - Create `src/features/toolbar/components/Toolbar.tsx` with buttons for each tool.
-- [ ] **1.6.2 Basic Shapes**
+- [*] **1.6.2 Basic Shapes**
   - Implement functions to add: Rectangle, Circle, Diamond, Cylinder (as per PRD 5.1.1).
-- [ ] **1.6.3 Smart Arrows**
+- [*] **1.6.3 Smart Arrows**
   - Implement arrow tool with basic point-to-point drawing.
-- [ ] **1.6.4 Text & Sticky Notes**
+- [*] **1.6.4 Text & Sticky Notes**
   - Implement Fabric.js `IText` and colored sticky note components.
 
 ### 1.7 Selection & Manipulation (Phase 1.4)
-- [ ] **1.7.1 Selection Styling**
+- [*] **1.7.1 Selection Styling**
   - Customize Fabric.js selection borders/corners to match ArchFlow brand colors.
-- [ ] **1.7.2 Object Manipulation**
+- [*] **1.7.2 Object Manipulation**
   - Ensure resize, rotate, and multi-select are functional.
-- [ ] **1.7.3 History System (Undo/Redo)**
+- [*] **1.7.3 History System (Undo/Redo)**
   - Implement a 100-level history stack in `useCanvasStore`.
 
 ### 1.8 Real-time Collaboration (Client-side)

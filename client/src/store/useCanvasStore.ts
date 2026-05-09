@@ -12,8 +12,74 @@ export const useCanvasStore = create<CanvasState & CanvasActions>((set) => ({
   selectedObjects: [],
   elements: [],
   fabricCanvas: null,
+  undoStack: [],
+  redoStack: [],
 
   // --- ACTIONS ---
+
+  /**
+   * Saves the current elements state to the undo stack.
+   * Limits history to 100 levels.
+   */
+  saveHistory: () => set((state) => {
+    // Don't save if the last state is identical (to prevent spam)
+    const lastState = state.undoStack[state.undoStack.length - 1];
+    if (lastState && JSON.stringify(lastState) === JSON.stringify(state.elements)) {
+      return state;
+    }
+
+    const newUndoStack = [...state.undoStack, [...state.elements]];
+    if (newUndoStack.length > 100) {
+      newUndoStack.shift(); // Remove oldest
+    }
+
+    return {
+      undoStack: newUndoStack,
+      redoStack: [], // Clear redo stack on new action
+    };
+  }),
+
+  /**
+   * Undoes the last action by restoring the previous state from undoStack.
+   */
+  undo: () => set((state) => {
+    if (state.undoStack.length === 0) return state;
+
+    const previousElements = state.undoStack[state.undoStack.length - 1];
+    const newUndoStack = state.undoStack.slice(0, -1);
+    const newRedoStack = [[...state.elements], ...state.redoStack];
+
+    if (newRedoStack.length > 100) {
+      newRedoStack.pop();
+    }
+
+    return {
+      elements: previousElements,
+      undoStack: newUndoStack,
+      redoStack: newRedoStack,
+    };
+  }),
+
+  /**
+   * Redoes the last undone action by restoring state from redoStack.
+   */
+  redo: () => set((state) => {
+    if (state.redoStack.length === 0) return state;
+
+    const nextElements = state.redoStack[0];
+    const newRedoStack = state.redoStack.slice(1);
+    const newUndoStack = [...state.undoStack, [...state.elements]];
+
+    if (newUndoStack.length > 100) {
+      newUndoStack.shift();
+    }
+
+    return {
+      elements: nextElements,
+      undoStack: newUndoStack,
+      redoStack: newRedoStack,
+    };
+  }),
 
   /**
    * Updates the active tool (e.g., 'rect', 'circle', 'pencil').
@@ -35,28 +101,51 @@ export const useCanvasStore = create<CanvasState & CanvasActions>((set) => ({
    * Adds a new element to the canvas state.
    */
   addElement: (element: CanvasElement) =>
-    set((state) => ({
-      elements: [...state.elements, element],
-    })),
+    set((state) => {
+      // Manual saveHistory logic here to avoid double set() if we can, 
+      // but let's keep it simple and just use the state.
+      const newUndoStack = [...state.undoStack, [...state.elements]];
+      if (newUndoStack.length > 100) newUndoStack.shift();
+
+      return {
+        elements: [...state.elements, element],
+        undoStack: newUndoStack,
+        redoStack: [],
+      };
+    }),
 
   /**
    * Updates an existing element in the canvas state.
    */
   updateElement: (fabricId: string, updates: Partial<CanvasElement>) =>
-    set((state) => ({
-      elements: state.elements.map((el) =>
-        el.fabricId === fabricId ? { ...el, ...updates } : el
-      ),
-    })),
+    set((state) => {
+      const newUndoStack = [...state.undoStack, [...state.elements]];
+      if (newUndoStack.length > 100) newUndoStack.shift();
+
+      return {
+        elements: state.elements.map((el) =>
+          el.fabricId === fabricId ? { ...el, ...updates } : el
+        ),
+        undoStack: newUndoStack,
+        redoStack: [],
+      };
+    }),
 
   /**
    * Removes an element from the canvas state.
    */
   removeElement: (fabricId: string) =>
-    set((state) => ({
-      elements: state.elements.filter((el) => el.fabricId !== fabricId),
-      selectedObjects: state.selectedObjects.filter((id) => id !== fabricId),
-    })),
+    set((state) => {
+      const newUndoStack = [...state.undoStack, [...state.elements]];
+      if (newUndoStack.length > 100) newUndoStack.shift();
+
+      return {
+        elements: state.elements.filter((el) => el.fabricId !== fabricId),
+        selectedObjects: state.selectedObjects.filter((id) => id !== fabricId),
+        undoStack: newUndoStack,
+        redoStack: [],
+      };
+    }),
 
   /**
    * Sets the fabric.Canvas instance.
