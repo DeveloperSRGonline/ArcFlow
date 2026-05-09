@@ -55,11 +55,13 @@ This document outlines the granular steps to set up the ArchFlow frontend from s
   - Create `src/features/auth/ProtectedRoute.tsx` to redirect unauthenticated users.
 
 ### 1.5 Canvas Foundation (Fabric.js 6.x)
-- [ ] **1.5.1 Canvas Initialization Hook**
+- [*] **1.5.1 Canvas Initialization Hook**
   - Create `src/features/canvas/hooks/useFabricCanvas.ts` to initialize `fabric.Canvas`.
-- [ ] **1.5.2 Infinite Canvas & Viewport**
-  - Implement panning (Space+Drag) and zooming (Mouse Wheel).
-- [ ] **1.5.3 Dot Grid Rendering**
+- [*] **1.5.2 Canvas Host Component**
+  - Create `src/features/canvas/components/CanvasContainer.tsx` and integrate it into `MainLayout`.
+- [*] **1.5.3 Infinite Canvas & Viewport**
+  - Implement panning (Alt+Drag/Middle Mouse) and zooming (Mouse Wheel).
+- [*] **1.5.4 Dot Grid Rendering**
   - Implement the background dot grid using a pattern or custom rendering on the canvas.
 
 ### 1.6 Drawing Tools (Phase 1.3)

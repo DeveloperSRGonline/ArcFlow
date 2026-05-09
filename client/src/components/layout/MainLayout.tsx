@@ -1,6 +1,8 @@
 import React from 'react';
 import './MainLayout.scss';
 
+import CanvasContainer from '../../features/canvas/components/CanvasContainer';
+
 interface MainLayoutProps {
   children?: React.ReactNode;
 }
@@ -9,7 +11,7 @@ interface MainLayoutProps {
  * MainLayout - Implements the three-column dark IDE layout
  * strictly following PRD Section 4.5.
  */
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+const MainLayout: React.FC<MainLayoutProps> = () => {
   return (
     <div className="layout-container">
       {/* Top Bar (56px): Board name, avatars, AI buttons, share, export */}
@@ -31,7 +33,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
         {/* Center: Infinite canvas with dot grid */}
         <main className="canvas-area canvas-wrapper">
-          {children}
+          <CanvasContainer />
         </main>
 
         {/* Right Panel (320px): Context Layer - properties, notes, code, etc. */}
