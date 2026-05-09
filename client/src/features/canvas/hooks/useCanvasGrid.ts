@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Pattern } from 'fabric';
 import { useCanvasStore } from '../../../store/useCanvasStore';
 
 /**
@@ -6,52 +7,39 @@ import { useCanvasStore } from '../../../store/useCanvasStore';
  * Following Phase 1.5.4 of setup-microsteps.md.
  */
 export const useCanvasGrid = () => {
-  const { fabricCanvas, zoom } = useCanvasStore();
+  const { fabricCanvas } = useCanvasStore();
 
   useEffect(() => {
     if (!fabricCanvas) return;
 
-    // Grid Settings from PRD 4.5
-    const gridSize = 20; // 20px dot grid
+    const gridSize = 20;
     
-    /**
-     * Draw the dot grid on the background layer.
-     * We use a custom render function to keep the grid "infinite" during pan/zoom.
-     */
-    const drawGrid = () => {
-      // Clear the background first (optional, backgroundColor already set)
-      
-      // Fabric.js background rendering is handled via viewportTransform
-      // But for an infinite grid, it's often better to use a pattern or 
-      // render it during the canvas 'after:render' event if performance allows.
-    };
-
-    // For MVP, we'll use a simpler approach: 
-    // Creating a small pattern and setting it as background.
-    const canvas = document.createElement('canvas');
-    canvas.width = gridSize;
-    canvas.height = gridSize;
-    const ctx = canvas.getContext('2d');
+    // Create a temporary canvas to draw the dot pattern
+    const patternCanvas = document.createElement('canvas');
+    patternCanvas.width = gridSize;
+    patternCanvas.height = gridSize;
+    const ctx = patternCanvas.getContext('2d');
 
     if (ctx) {
-      ctx.fillStyle = '#1E1E35'; // --color-grid from PRD
+      // Background of the pattern (matching --color-canvas)
+      ctx.fillStyle = '#111120'; 
+      ctx.fillRect(0, 0, gridSize, gridSize);
+
+      // The dot (matching --color-grid or more visible for test)
+      ctx.fillStyle = '#3A3A5E'; // Brighter for visibility test
       ctx.beginPath();
-      ctx.arc(1, 1, 1, 0, Math.PI * 2); // Tiny dot
+      ctx.arc(1, 1, 1, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // Convert to dataURL and set as background pattern
-    const patternUrl = canvas.toDataURL();
-    
-    // In Fabric.js 6, we use Pattern class
-    // (Skipping complex Pattern setup for now to ensure it works first)
-    // fabricCanvas.setBackgroundColor({ source: patternUrl, repeat: 'repeat' }, fabricCanvas.renderAll.bind(fabricCanvas));
-    
-    // Alternative: Use CSS background on the container (already in global.scss)
-    // However, to make it snap and move with the canvas, it should be on-canvas.
-    
-    // Since global.scss already has a grid, we'll keep it for now and 
-    // focus on making it "dynamic" if needed later.
+    // Use Fabric.js Pattern for the background
+    const pattern = new Pattern({
+      source: patternCanvas,
+      repeat: 'repeat'
+    });
 
-  }, [fabricCanvas, zoom]);
+    fabricCanvas.backgroundColor = pattern;
+    fabricCanvas.renderAll();
+
+  }, [fabricCanvas]);
 };
